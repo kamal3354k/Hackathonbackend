@@ -1,6 +1,7 @@
 
-
-export const leadIds=[
+const leadIds=[
     { leadId: 123234},
     { leadId: 2341233 }
 ]
+
+module.exports = {leadIds};

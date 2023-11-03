@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const {leadIds} = require('./data');
 
 // Start the server
 const port = process.env.PORT || 4000;
@@ -19,7 +20,12 @@ app.get('/api/checkEligibility', (req, res) => {
     if (!leadId) {
       return res.status(400).json({ error: 'Missing leadId parameter' });
     }
-    res.status(200).json({ eligible: true });
+    const foundLead = leadIds.find((lead) => lead.leadId === parseInt(leadId, 10));
+    if (foundLead) {
+      res.status(200).json({ eligible: true });
+    } else {
+      res.status(200).json({ eligible: false });
+    }
 
   } catch (error) {
     res.status(500).json({ error: 'Error checking eligibility' });
