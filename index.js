@@ -4,10 +4,7 @@ const {leadIds, custLeadMapping, proposerData,RedirectUrl} = require('./data');
 const cors = require('cors');
 
 // Enable CORS for all routes
-app.use(cors({
-  origin: 'http://localhost:3000/',
-methods: 'GET,POST'
-}));
+app.use(cors());
 
 
 app.use(express.json())
