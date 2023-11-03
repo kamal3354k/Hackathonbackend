@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const {leadIds, custLeadMapping, proposerData} = require('./data');
+const {leadIds, custLeadMapping, proposerData,RedirectUrl} = require('./data');
 const cors = require('cors');
 
 // Enable CORS for all routes
@@ -9,7 +9,7 @@ app.use(cors());
 
 app.use(express.json())
 // Start the server
-const port = process.env.PORT || 4001;
+const port = process.env.PORT || 4002;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
@@ -127,7 +127,14 @@ app.post('/api/generateRedirectLink', (req, res) => {
 });
 
 function generateRedirectUrl(requestData) {
-  const redirectUrl="https://healthqa.policybazaar.com/proposalv2?encenq=dTM4TG4zcDNiSmVmaElMNWYvVWR4NDE2aEpOckpwOGUvc1JmSy96RGF6cz0&enquiryid=NDQ0NTI5OQ==&k=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbnF1aXJ5SWQiOjQ0NDUyOTksIkV4cGlyeVRpbWUiOjE3MDY3NjQ4NDl9.PNSb0Nr98iUGLAhmbUK_cm72TTbTTfeHR1p8Oqhkh7LbwkZZZ5FdrXpNT18Bsic2yDFZgcKDbMolBRiSi2xnEouMhDwQoZlLnx0bktAfM9JQMZ7X2WhjmfZoxGVcZBApP8gSmAtCc4rbdsnKyRd98KinwMeUH_BOh96UCwmn9xk"
+  const selectedRedirect = RedirectUrl.find(item => item.ProductId === requestData.ProductID);
+  let redirectUrl;
+  if (selectedRedirect) {
+    redirectUrl= selectedRedirect.Url;
+  } else {
+    return "no Url for given productId";
+  }
+  // const redirectUrl="https://healthqa.policybazaar.com/proposalv2?encenq=dTM4TG4zcDNiSmVmaElMNWYvVWR4NDE2aEpOckpwOGUvc1JmSy96RGF6cz0&enquiryid=NDQ0NTI5OQ==&k=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbnF1aXJ5SWQiOjQ0NDUyOTksIkV4cGlyeVRpbWUiOjE3MDY3NjQ4NDl9.PNSb0Nr98iUGLAhmbUK_cm72TTbTTfeHR1p8Oqhkh7LbwkZZZ5FdrXpNT18Bsic2yDFZgcKDbMolBRiSi2xnEouMhDwQoZlLnx0bktAfM9JQMZ7X2WhjmfZoxGVcZBApP8gSmAtCc4rbdsnKyRd98KinwMeUH_BOh96UCwmn9xk"
   const fields = requestData.fieldList.filter(item => item !== undefined).join(',');
   const finalRedirectUrl = `${redirectUrl}?fieldList=${fields}`;
   return finalRedirectUrl;
