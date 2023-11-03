@@ -1,7 +1,13 @@
 const express = require('express');
 const app = express();
 const {leadIds, custLeadMapping, proposerData} = require('./data');
+const cors = require('cors');
 
+// Enable CORS for all routes
+app.use(cors());
+
+
+app.use(express.json())
 // Start the server
 const port = process.env.PORT || 4001;
 app.listen(port, () => {
@@ -64,5 +70,39 @@ app.get('/api/getProposalDetails', (req, res) => {
     res.status(500).json({statusCode:500,statusMsg:"Error while fetch proposal data"});
   }
 });
+
+
+// Api to push data to caseLogin
+// Create API endpoints
+
+app.post('/api/setCustConsent', (req, res) => {
+  const requestData = req.body;
+
+  try {
+    if (validateRequest(requestData)) {
+      if (requestData.IsConsent) {
+        // Simulate a 1-second delay
+        setTimeout(() => {
+          res.json({ status: 'success', message: 'Consent received' });
+        }, 1000);
+      } else {
+        res.status(200).json({ statusCode:200,statusMsg: 'Consent not set' });
+      }
+    } else {
+      res.status(400).json({ statusCode:400,statusMsg: 'Invalid request data' });
+    }
+  } catch (error) {
+    res.status(500).json({statusCode:500,statusMsg:"Error while setting consent"});
+  }
+});
+
+function validateRequest(requestData) {
+  return (
+    requestData &&
+    requestData.hasOwnProperty('IsConsent') &&
+    requestData.hasOwnProperty('LeadID') &&
+    requestData.hasOwnProperty('CustomerID')
+  );
+}
 
 
