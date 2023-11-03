@@ -88,7 +88,7 @@ app.post('/api/setCustConsent',(req, res) => {
       if (requestData.IsConsent) {
         // Simulate a 1-second delay
         setTimeout(() => {
-          res.json({ status: 'success', message: 'Consent received' });
+          res.json({statusCode:200,statusMsg: 'success',message: 'Consent received' });
         }, 1000);
       } else {
         res.status(200).json({ statusCode:200,statusMsg: 'Consent not set' });
@@ -116,7 +116,7 @@ app.post('/api/generateRedirectLink', (req, res) => {
   const requestData = req.body;
 
   try {
-    if (validateRequest(requestData)) {
+    if (validateRedirectRequest(requestData)) {
       if(requestData.fieldList){
         const redirectUrl = generateRedirectUrl(requestData);
         res.status(200).json({ statusCode:200,statusMsg: 'success',redirectUrl:redirectUrl});
@@ -146,7 +146,7 @@ function generateRedirectUrl(requestData) {
   return finalRedirectUrl;
 }
 
-function validateRequest(requestData) {
+function validateRedirectRequest(requestData) {
   return (
     requestData &&
     requestData.hasOwnProperty('LeadID') &&
