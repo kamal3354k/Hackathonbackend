@@ -14,6 +14,12 @@ app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  methods: 'GET,POST', // Specify the allowed methods
+  allowedHeaders: 'Content-Type', // Specify the allowed headers
+};
+
 
 app.get('/', (req, res) => {
   res.send('Api is running')
@@ -74,7 +80,9 @@ app.get('/api/getProposalDetails', (req, res) => {
 
 // Api to push data to caseLogin
 
-app.post('/api/setCustConsent', (req, res) => {
+app.options('/api/setCustConsent', cors(corsOptions)); 
+// Handle preflight requests
+app.post('/api/setCustConsent', cors(corsOptions), (req, res) => {
   const requestData = req.body;
 
   try {
