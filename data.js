@@ -13,7 +13,7 @@ const proposerData=[
   {
     LeadID: 111,
     CustomerID: 12345,
-    ProposalNumber:"PB28739",
+    ProposalNumber:"PB287391",
     Name : "Deepak",
     PropserDetails: [
       { ID: 10, Label: 'Name', Value: 'Deepak' },

@@ -4,7 +4,14 @@ const {leadIds, custLeadMapping, proposerData,RedirectUrl} = require('./data');
 const cors = require('cors');
 
 // Enable CORS for all routes
-app.use(cors());
+app.use(cors({ origin: true }));
+// Api to push data to caseLogin
+
+app.options('*', cors({
+  origin: 'http://localhost:3000/detail-page',
+  methods: 'GET,POST',
+  allowedHeaders: 'Content-Type,Authorization',
+}));
 
 
 app.use(express.json())
@@ -77,10 +84,6 @@ app.get('/api/getProposalDetails', (req, res) => {
   }
 });
 
-
-// Api to push data to caseLogin
-
-app.options('*', cors());
 app.post('/api/setCustConsent', (req, res) => {
   const requestData = req.body;
 
