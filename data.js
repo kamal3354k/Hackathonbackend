@@ -13,6 +13,8 @@ const proposerData=[
   {
     LeadID: 111,
     CustomerID: 12345,
+    ProposalNumber:"PB287391",
+    Name : "Deepak",
     PropserDetails: [
       { ID: 10, Label: 'Name', Value: 'Deepak' },
       { ID: 11, Label: 'MobileNo', Value: 9867268811 },
@@ -50,6 +52,8 @@ const proposerData=[
   {
     LeadID: 112,
     CustomerID: 12346,
+    ProposalNumber:"PB2793491",
+    Name : "Saurabh",
     PropserDetails: [
       { ID: 10, Label: 'Name', Value: 'Saurabh' },
       { ID: 11, Label: 'MobileNo', Value: 9897969594 },
@@ -91,6 +95,8 @@ const proposerData=[
   {
     LeadID: 113,
     CustomerID: 12347,
+    ProposalNumber:"PB8398923",
+    Name : "Mohit Da",
     PropserDetails: [
       { ID: 10, Label: 'Name', Value: 'Mohit Da' },
       { ID: 11, Label: 'MobileNo', Value: 9182736450 },
@@ -131,5 +137,11 @@ const proposerData=[
   }
 ]
 
+const RedirectUrl=[
+  {"ProductId":2,Url:"https://healthqa.policybazaar.com/proposalv2?encenq=dTM4TG4zcDNiSmVmaElMNWYvVWR4NDE2aEpOckpwOGUvc1JmSy96RGF6cz0&enquiryid=NDQ0NTI5OQ==&k=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbnF1aXJ5SWQiOjQ0NDUyOTksIkV4cGlyeVRpbWUiOjE3MDY3NjQ4NDl9.PNSb0Nr98iUGLAhmbUK_cm72TTbTTfeHR1p8Oqhkh7LbwkZZZ5FdrXpNT18Bsic2yDFZgcKDbMolBRiSi2xnEouMhDwQoZlLnx0bktAfM9JQMZ7X2WhjmfZoxGVcZBApP8gSmAtCc4rbdsnKyRd98KinwMeUH_BOh96UCwmn9xk"},
+  {"ProductId":7,Url:"https://healthqa.policybazaar.com/proposalv2?encenq=dTM4TG4zcDNiSmVmaElMNWYvVWR4NDE2aEpOckpwOGUvc1JmSy96RGF6cz0&enquiryid=NDQ0NTI5OQ==&k=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbnF1aXJ5SWQiOjQ0NDUyOTksIkV4cGlyeVRpbWUiOjE3MDY3NjQ4NDl9.PNSb0Nr98iUGLAhmbUK_cm72TTbTTfeHR1p8Oqhkh7LbwkZZZ5FdrXpNT18Bsic2yDFZgcKDbMolBRiSi2xnEouMhDwQoZlLnx0bktAfM9JQMZ7X2WhjmfZoxGVcZBApP8gSmAtCc4rbdsnKyRd98KinwMeUH_BOh96UCwmn9xk"},
+  {"ProductId":115,Url:"https://healthqa.policybazaar.com/proposalv2?encenq=dTM4TG4zcDNiSmVmaElMNWYvVWR4NDE2aEpOckpwOGUvc1JmSy96RGF6cz0&enquiryid=NDQ0NTI5OQ==&k=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbnF1aXJ5SWQiOjQ0NDUyOTksIkV4cGlyeVRpbWUiOjE3MDY3NjQ4NDl9.PNSb0Nr98iUGLAhmbUK_cm72TTbTTfeHR1p8Oqhkh7LbwkZZZ5FdrXpNT18Bsic2yDFZgcKDbMolBRiSi2xnEouMhDwQoZlLnx0bktAfM9JQMZ7X2WhjmfZoxGVcZBApP8gSmAtCc4rbdsnKyRd98KinwMeUH_BOh96UCwmn9xk"},
+]
 
-module.exports = {leadIds,proposerData, custLeadMapping};
+
+module.exports = {leadIds,proposerData, custLeadMapping,RedirectUrl};
