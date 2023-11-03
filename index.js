@@ -73,7 +73,6 @@ app.get('/api/getProposalDetails', (req, res) => {
 
 
 // Api to push data to caseLogin
-// Create API endpoints
 
 app.post('/api/setCustConsent', (req, res) => {
   const requestData = req.body;
@@ -102,6 +101,45 @@ function validateRequest(requestData) {
     requestData.hasOwnProperty('IsConsent') &&
     requestData.hasOwnProperty('LeadID') &&
     requestData.hasOwnProperty('CustomerID')
+  );
+}
+
+// Api to generate redrection Link
+
+app.post('/api/generateRedirectLink', (req, res) => {
+  const requestData = req.body;
+
+  try {
+    if (validateRequest(requestData)) {
+      if(requestData.fieldList){
+        const redirectUrl = generateRedirectUrl(requestData);
+        res.status(200).json({ statusCode:200,statusMsg: 'success',redirectUrl:redirectUrl});
+      }else{
+        return res.status(400).json({statusCode:400,statusMsg:"Missing mandatory parameter"});
+      }
+      
+    } else {
+      res.status(400).json({ statusCode:400,statusMsg: 'Invalid request data' });
+    }
+  } catch (error) {
+    res.status(500).json({statusCode:500,statusMsg:"Error while setting consent"});
+  }
+});
+
+function generateRedirectUrl(requestData) {
+  const redirectUrl="https://healthqa.policybazaar.com/proposalv2?encenq=dTM4TG4zcDNiSmVmaElMNWYvVWR4NDE2aEpOckpwOGUvc1JmSy96RGF6cz0&enquiryid=NDQ0NTI5OQ==&k=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbnF1aXJ5SWQiOjQ0NDUyOTksIkV4cGlyeVRpbWUiOjE3MDY3NjQ4NDl9.PNSb0Nr98iUGLAhmbUK_cm72TTbTTfeHR1p8Oqhkh7LbwkZZZ5FdrXpNT18Bsic2yDFZgcKDbMolBRiSi2xnEouMhDwQoZlLnx0bktAfM9JQMZ7X2WhjmfZoxGVcZBApP8gSmAtCc4rbdsnKyRd98KinwMeUH_BOh96UCwmn9xk"
+  const fields = requestData.fieldList.filter(item => item !== undefined).join(',');
+  const finalRedirectUrl = `${redirectUrl}?fieldList=${fields}`;
+  return finalRedirectUrl;
+}
+
+function validateRequest(requestData) {
+  return (
+    requestData &&
+    requestData.hasOwnProperty('LeadID') &&
+    requestData.hasOwnProperty('CustomerID') &&
+    requestData.hasOwnProperty('ProductID') &&
+    Array.isArray(requestData.fieldList)
   );
 }
 
