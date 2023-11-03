@@ -3,7 +3,7 @@ const app = express();
 const {leadIds, custLeadMapping, proposerData} = require('./data');
 
 // Start the server
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 4001;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
@@ -27,13 +27,14 @@ app.get('/api/checkEligibility', (req, res) => {
     }
     const foundLead = leadIds.find((lead) => lead.leadId === parseInt(leadId, 10));
     if (foundLead) {
-      res.status(200).json({ eligible: true });
+      res.status(200).json({statusCode:200,statusMsg:"success",eligible: true });
     } else {
-      res.status(200).json({ eligible: false });
+      res.status(200).json({statusCode:200,statusMsg:"success",eligible: false });
     }
 
   } catch (error) {
-    res.status(500).json({ error: 'Error checking eligibility' });
+    
+    res.status(500).json({statusCode:500,statusMsg:"Error checking eligibility"});
   }
 });
 
@@ -45,7 +46,7 @@ app.get('/api/getProposalDetails', (req, res) => {
 
   try {
     if (!leadId || !customerId) {
-      return res.status(400).json({ error: 'Missing mandatory parameter' });
+      return res.status(400).json({statusCode:400,statusMsg:"Missing mandatory parameter"});
     }
 
     if(!custLeadMapping[customerId.toString()].includes(parseInt(leadId))){
@@ -60,6 +61,8 @@ app.get('/api/getProposalDetails', (req, res) => {
     }
 
   } catch (error) {
-    res.status(500).json({ error: 'Error while fetch proposal data' });
+    res.status(500).json({statusCode:500,statusMsg:"Error while fetch proposal data"});
   }
 });
+
+
