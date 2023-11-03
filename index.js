@@ -80,9 +80,8 @@ app.get('/api/getProposalDetails', (req, res) => {
 
 // Api to push data to caseLogin
 
-app.options('/api/setCustConsent', cors(corsOptions)); 
-// Handle preflight requests
-app.post('/api/setCustConsent', cors(corsOptions), (req, res) => {
+app.options('*', cors());
+app.post('/api/setCustConsent', (req, res) => {
   const requestData = req.body;
 
   try {
