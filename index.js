@@ -5,7 +5,7 @@ const cors = require('cors');
 
 // Enable CORS for all routes
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: '*',
   methods: 'GET,POST', // Specify the allowed methods
   allowedHeaders: 'Content-Type', // Specify the allowed headers
 };
